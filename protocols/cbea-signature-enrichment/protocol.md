@@ -209,12 +209,11 @@ does, pooling across samples rather than building a separate null per sample:
 
 1. Draw `n_perm = 100` random subsets of `U`, each of size `k`, without
    replacement within a subset, using the recorded seed. In the `CBEA`
-   package, the subsets are drawn inside a `BiocParallel` backend. When no
-   backend is supplied, the package seeds a serial backend from the current
-   R random stream, so calling `set.seed(random_seed)` immediately before
-   `CBEA::cbea()` reproduces the subsets. When a backend is supplied, its
-   `RNGseed` must be set to `random_seed`, as in the call below; a backend
-   without `RNGseed` is not reproducible.
+   package (version 0.99.4), the exported `cbea()` methods accept a
+   `parallel_backend` argument but do not forward it to the internal
+   fitter, which seeds a serial backend from the current R random stream.
+   Call `set.seed(random_seed)` immediately before `CBEA::cbea()` and do
+   not rely on the `parallel_backend` argument for reproducibility.
 2. Apply every subset to every sample with the formula above. This yields
    `n_perm` times the number of samples null scores for the signature,
    pooled into one vector.
@@ -240,10 +239,10 @@ does, pooling across samples rather than building a separate null per sample:
 In the `CBEA` package the call that performs Steps 4.1 through 4.5 is:
 
 ```r
+set.seed(random_seed)
 CBEA::cbea(obj = abundance, set = signatures, output = "pval",
            abund_values = "relative_abundance", distr = "norm",
-           adj = TRUE, n_perm = 100,
-           parallel_backend = BiocParallel::SerialParam(RNGseed = random_seed))
+           adj = TRUE, n_perm = 100)
 ```
 
 where `abundance` is a `TreeSummarizedExperiment` whose named assay holds the
@@ -253,8 +252,9 @@ harmonized, strictly positive relative abundances, and `signatures` is the
 subsets as described above, and the protocol follows the implementation.
 
 The null hypothesis is competitive: within a sample, the taxa in the signature
-have the same balance-level abundance as a random set of the same size drawn
-from the measured taxa outside the signature. It is not a null that every
+have the same balance against their complement as a random set of the same
+size drawn from the whole measured universe `U`, signature members included,
+has against its own complement. It is not a null that every
 signature taxon has no association with the sample condition, and it is not a
 test that every member of the signature is individually differentially
 abundant.
