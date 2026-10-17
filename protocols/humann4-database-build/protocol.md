@@ -15,18 +15,14 @@ reviews:
     protocol_version: 1.0.0
     status: approved
 date: 2026-08-18
-status: draft
+status: stable
 license: CC-BY-4.0
 type: composite
 
 artifact_doi: ~
-collection_doi: ~
+collection_doi: "10.5281/zenodo.22731694"
 
-protocol_citation: ~
-
-# The bioBakery paper proposes this database-construction pipeline as a method, so it belongs here even
-# though the protocol is composite. The constituent protocols' own method_citations are inherited.
-method_citation: "10.7554/eLife.65088"
+protocol_citation: "10.7554/eLife.65088"
 
 upstream_repositories:
   - "https://github.com/biobakery/humann"

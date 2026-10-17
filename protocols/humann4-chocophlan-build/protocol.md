@@ -15,15 +15,13 @@ reviews:
     protocol_version: 1.0.0
     status: approved
 date: 2026-08-08
-status: draft
+status: stable
 license: CC-BY-4.0
 type: atomic
 
 artifact_doi: ~
-collection_doi: ~
-protocol_citation: ~
-
-method_citation: "10.7554/eLife.65088"
+collection_doi: "10.5281/zenodo.22731694"
+protocol_citation: "10.7554/eLife.65088"
 
 upstream_repositories:
   - "https://github.com/biobakery/humann"

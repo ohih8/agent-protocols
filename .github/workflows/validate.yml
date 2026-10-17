@@ -10,4 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: waldronlab/agent-protocol-standard/actions/validate-protocols@v0
+      # @main, not a release tag. @v0 predated the Python rewrite, so every pull request here was
+      # being checked by the old R validator — the Pydantic rules were enforcing nothing, silently.
+      - uses: waldronlab/agent-protocol-standard/actions/validate-protocols@main

@@ -18,9 +18,11 @@ never edit it by hand, and do not expect a hand-written list anywhere to be auth
 
 ## Contributing a protocol
 
-Read [`PROTOCOL_STANDARD.md`](https://github.com/waldronlab/agent-protocol-standard/blob/main/PROTOCOL_STANDARD.md)
-first; it is the authority on the format, and CI enforces it on every pull request. See
-[CONTRIBUTING.md](CONTRIBUTING.md).
+We welcome new protocols! Your primary concern as a contributor should be **clarity and scientific correctness**. Don't worry too much about formatting syntax—our continuous integration (CI) tools will automatically check that for you when you open a pull request.
+
+To get started:
+1. **Find an idea:** Check our [Issues](https://github.com/waldronlab/agent-protocols/issues) tab and look for the `good-first-protocol` label to find a protocol that needs writing.
+2. **Read the guide:** Follow the step-by-step instructions in [CONTRIBUTING.md](CONTRIBUTING.md) to claim an issue, set up your file from a template, and submit your work.
 
 ## Discovery
 

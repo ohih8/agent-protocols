@@ -13,10 +13,14 @@ reviews:
     protocol_version: "1.2.1"
     status: "approved"
 date: "2026-09-03"
-status: "draft"
+status: stable
 type: "atomic"
+
+artifact_doi: ~
+collection_doi: "10.5281/zenodo.22731694"
+protocol_citation: "10.1073/pnas.0914005107"
 license: "CC-BY-4.0"
-method_citation: "10.1073/pnas.0914005107"
+method_origin_citation: "10.1073/pnas.0914005107"
 protocols_used: []
 category: "Statistical Analysis"
 tags: [filtering, variance, mean, high-throughput]
@@ -82,7 +86,7 @@ This protocol covers only the filtering operation. Any downstream testing or mul
 - Rewrote the steps to be language-agnostic, removing the R implementation and describing the filtering operation in prose.
 - Added overall mean filtering as an alternative to overall variance filtering, matching the two strategies described in the source paper.
 - Clarified the `theta` cutoff and the use of `floor()` when determining how many features to remove.
-- Removed `publication_doi`, which duplicated `citation`. *(Both fields were later renamed to `protocol_citation` and `method_citation`; this entry keeps the names in use at the time.)*
+- Removed `publication_doi`, which duplicated `citation`. *(Both fields were later renamed to `protocol_citation` and `method_origin_citation`; this entry keeps the names in use at the time.)*
 
 #### Reviews
 

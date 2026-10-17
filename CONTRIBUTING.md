@@ -1,61 +1,41 @@
 # Contributing
 
-## The format is defined elsewhere
+Your primary concern as a contributor is **clarity, absence of ambiguity, scientific correctness, and accurate citation**. Our continuous integration (CI) tools will automatically validate your formatting syntax when you open a pull request, so focus on the science.
 
-[`PROTOCOL_STANDARD.md`](https://github.com/waldronlab/agent-protocol-standard/blob/main/PROTOCOL_STANDARD.md)
-in `waldronlab/agent-protocol-standard` is the authority on what a `protocol.md` must contain. This
-repository holds content only; it does not define or extend the format. If you believe the format
-itself needs to change, open an issue there rather than working around it here.
+## Step 1: Claim an Issue
+Browse the [Issues](https://github.com/waldronlab/agent-protocols/issues) tab and look for the `good-first-protocol` label. 
+To claim an issue, **comment on that issue stating you are beginning work**. Use the issue thread to post questions, comments, and other follow-up while you draft the protocol.
 
-## Deciding what to write
+## Step 2: Set up from Template
+Do not write the complex YAML frontmatter from scratch. Instead, copy the official boilerplate from the standard repository:
+[Protocol Template](https://github.com/waldronlab/agent-protocol-standard/tree/main/template)
 
-This file covers mechanics. [`AUTHORING.md`](AUTHORING.md) covers the judgement calls the mechanics
-cannot check: finding the paper that actually proposed a method, recognizing when what looks like one
-protocol is really two, when alternatives may live inside a single protocol, and what to state as out
-of scope. Read it before writing a new protocol.
+1. Create a directory `protocols/<name>/`. The directory name must exactly match the `name` field in your YAML frontmatter.
+2. Copy the template into your new directory as `protocol.md`.
 
-## Adding a protocol
+## Step 3: Write
+Read [`AUTHORING.md`](AUTHORING.md) for philosophical guidelines on how to write your protocol. It covers the judgement calls that CI cannot check: finding the paper that actually proposed a method, recognizing when what looks like one protocol is really two, and what to state as out of scope.
 
-1. Create `protocols/<name>/protocol.md`. The directory name must exactly match the `name` field in
-   the YAML frontmatter.
-2. Fill in the required frontmatter — `name`, `description`, `version`, `authors`, `date`, `status` —
-   and the provenance fields that apply. An atomic protocol carries exactly one `method_citation` naming the
-   primary literature where the method was published.
-3. End the file with a `## History & Reviews` section. A first release has one version entry, a
-   `#### Changes` bullet list, and `*No reviews yet.*` under `#### Reviews`; omit the `reviews:`
-   frontmatter field entirely until someone has actually reviewed it.
-4. Open a pull request. CI validates every protocol in the repository and will tell you precisely
-   what is wrong.
+Fill in the required frontmatter (`name`, `description`, `version`, `authors`, `date`, `status`, `protocol_citation`) and write the human-readable instructions. Add `method_origin_citation` where the protocol performs a method someone proposed; see [AUTHORING.md](AUTHORING.md).
+
+End the file with a `## History & Reviews` section as demonstrated in the template. Omit the `reviews:` frontmatter field entirely until someone has actually reviewed it.
+
+## Step 4: Validate and Submit
+Open a pull request. **You can rely on CI for validation.** The repository's automated testing infrastructure will check your syntax and tell you precisely what is wrong. Focus on getting the scientific correctness right.
+
+*(To run the validator locally before pushing, clone `waldronlab/agent-protocol-standard` beside this repository, install its dependencies with `pip install 'pydantic>=2.0.0' pyyaml`, and from here run `python3 ../agent-protocol-standard/scripts/validate_protocol.py protocols`. It takes the protocols directory, not a single file, and validates every protocol in it.)*
+
+---
 
 ## Changing an existing protocol
-
-Bump `version:` and `date:`, and add a matching entry at the **top** of `## History & Reviews` with
-the same version and date. The validator enforces that the top entry agrees with the frontmatter, so
-a version bump without a history entry fails.
+Bump `version:` and `date:`, and add a matching entry at the **top** of `## History & Reviews` with the same version and date. The validator enforces that the top entry agrees with the frontmatter.
 
 ## Recording a review
-
-A review is recorded twice, and the two must agree: a `**Review by <Name>**` block under the version
-that was reviewed, and an entry in the frontmatter `reviews:` array whose `protocol_version` is that
-version. The validator compares the date, status, and ORCID across both, so a human reader and a
-machine reader can never draw different conclusions.
-
-A review applies to the version it was given for. Do not move an existing review onto a new release.
+A review is recorded twice, and the two must agree: a `**Review by <Name>**` block under the version that was reviewed, and an entry in the frontmatter `reviews:` array whose `protocol_version` is that version. The validator compares the date, status, and ORCID across both. A review applies to the version it was given for. Do not move an existing review onto a new release.
 
 ## Do not edit `PROTOCOLS.yaml`
+It is generated by CI on every push to `main` that changes a protocol or the generator workflow itself. Hand edits will be overwritten.
 
-It is generated by CI on every push to `main` that changes a protocol or the generator workflow
-itself — the index is a function of both. Hand edits are overwritten by the next such push — and
-until then, the index disagrees with the protocols it claims to describe, which is worse than
-either.
-
-## Running the validator locally
-
-Optional — CI runs it on every pull request — but faster to iterate against:
-
-```sh
-git clone https://github.com/waldronlab/agent-protocol-standard.git
-Rscript agent-protocol-standard/scripts/validate-protocol.R protocols
-```
-
-It needs the R packages `rmarkdown` and `yaml`.
+## Reference: The Protocol Format
+[`PROTOCOL_STANDARD.md`](https://github.com/waldronlab/agent-protocol-standard/blob/main/PROTOCOL_STANDARD.md)
+in `waldronlab/agent-protocol-standard` is the definitive dictionary on what a `protocol.md` must contain. If you are unsure what a specific frontmatter field means, consult the standard. This repository holds content only; it does not define or extend the format.
