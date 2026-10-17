@@ -224,7 +224,8 @@ does, pooling across samples rather than building a separate null per sample:
    `parallel_backend` argument but do not forward it to the internal
    fitter, which seeds a serial backend from the current R random stream.
    Call `set.seed(random_seed)` immediately before `CBEA::cbea()` and do
-   not rely on the `parallel_backend` argument for reproducibility.
+   not rely on the `parallel_backend` argument for reproducibility
+   (reported upstream as https://github.com/qpmnguyen/CBEA/issues/13).
 2. Apply every subset to every sample with the formula above. This yields
    `n_perm` times the number of samples null scores for the signature,
    pooled into one vector.
@@ -319,8 +320,10 @@ the correlation adjustment for the mixture in `CBEA` version 0.99.4
 the component standard deviations and mean offsets, so the adjusted null is
 miscalibrated. For equally weighted components with means -3 and 3 and unit
 standard deviations, it returns 1 where the correct value is the square root
-of 10. If a corrected implementation is validated, a later version of this
-protocol can permit `mnorm` as an alternative from the same paper.
+of 10. This is reported upstream as
+https://github.com/qpmnguyen/CBEA/issues/12. If a corrected implementation
+is validated, a later version of this protocol can permit `mnorm` as an
+alternative from the same paper.
 
 The vignette requested `output = "zscore"` from `CBEA::cbea()` and passed the
 per-sample z-scores to a between-group linear model. That downstream analysis
