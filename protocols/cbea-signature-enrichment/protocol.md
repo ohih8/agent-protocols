@@ -7,6 +7,12 @@ authors:
     orcid: "0009-0009-8629-6124"
   - name: "Levi Waldron"
     orcid: "0000-0003-2725-0694"
+reviews:
+  - name: "Levi Waldron"
+    orcid: "0000-0003-2725-0694"
+    date: "2026-10-17"
+    protocol_version: "1.0.0"
+    status: "approved"
 date: "2026-10-17"
 status: draft
 type: "atomic"
@@ -336,4 +342,8 @@ protocols.
   signatures, with BugSigDB retained as the worked example.
 
 #### Reviews
-*No reviews yet.*
+
+**Review by Levi Waldron ([0000-0003-2725-0694](https://orcid.org/0000-0003-2725-0694))**
+- **Date:** 2026-10-17
+- **Status:** `approved`
+- **Notes:** Converted the protocol from a BugSigDB-specific protocol to a general CBEA protocol for any collection of microbial signatures, keeping BugSigDB as the worked example. Added code snippets naming the `bugsigdbr` and `CBEA` functions that perform each step. Restricted input to linear-scale relative abundance so that aggregation to the target rank can sum rows, with excluded rows logged as warnings. Specified the pooled cross-sample null, the correlation adjustment, upper-tail p-values, and seeding by `set.seed()` because the package does not forward its `parallel_backend` argument. Defined the multiple-testing family as all retained signatures within a sample.
