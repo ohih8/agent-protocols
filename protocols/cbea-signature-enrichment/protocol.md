@@ -67,10 +67,10 @@ taxa in the declared background universe.
   - Record the source, version or release, retrieval date, and any filters used
     to select signatures.
   - **BugSigDB example.** Import a versioned BugSigDB release with
-    `bugsigdbr::importBugSigDB(version = <release or Zenodo DOI>)` and extract
-    signatures at the chosen rank with
-    `bugsigdbr::getSignatures(tax.id.type = "taxname", tax.level = rank,
-    exact.tax.level = FALSE)`. The last argument maps members curated below
+    `bsdb <- bugsigdbr::importBugSigDB(version = <release or Zenodo DOI>)`
+    and extract signatures at the chosen rank with
+    `bugsigdbr::getSignatures(bsdb, tax.id.type = "taxname", tax.level =
+    rank, exact.tax.level = FALSE)`. The last argument maps members curated below
     `rank` up to `rank`, which is the mapping Step 2 permits. The release
     identifier is the version to record.
 - **Software**
@@ -241,13 +241,14 @@ In the `CBEA` package the call that performs Steps 4.1 through 4.5 is:
 ```r
 set.seed(random_seed)
 CBEA::cbea(obj = abundance, set = signatures, output = "pval",
-           abund_values = "relative_abundance", distr = "norm",
+           abund_values = "relative_abundance", distr = distribution,
            adj = TRUE, n_perm = 100)
 ```
 
 where `abundance` is a `TreeSummarizedExperiment` whose named assay holds the
 harmonized, strictly positive relative abundances, and `signatures` is the
-`BiocSet` of retained signatures. The package documentation describes
+`BiocSet` of retained signatures, and `distribution` is `"norm"` unless
+`"mnorm"` was selected and recorded. The package documentation describes
 `n_perm` as bootstrap resamples; the implementation draws random taxon
 subsets as described above, and the protocol follows the implementation.
 
