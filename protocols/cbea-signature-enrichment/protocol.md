@@ -93,8 +93,8 @@ taxa in the declared background universe.
     universe.
   - `n_perm`: 100 random taxon subsets for the null distribution.
   - `distribution`: `norm`, a normal distribution fitted to the null scores.
-    `mnorm`, the two-component normal mixture from the same paper, is the only
-    permitted alternative and must be recorded if chosen.
+    The two-component mixture (`mnorm`) described in the same paper is not
+    permitted; see Notes.
   - `correlation_adjustment`: enabled (`adj = TRUE` in `CBEA::cbea()`).
   - `multiple_testing_method`: Benjamini-Hochberg false-discovery-rate
     adjustment, with the family defined in Step 5.
@@ -118,7 +118,12 @@ check must run before that function so the silent replacement never happens.
 Select `pooled` or `per_dataset` before examining enrichment results. Use
 `pooled` only when datasets have compatible taxonomic processing, abundance
 scales, and sample-level metadata. In pooled mode, combine the compatible
-datasets and define one universe across the combined table. In per-dataset
+datasets on the union of their taxon identifiers, so that a taxon absent
+from one dataset is zero in that dataset's samples, then apply the upstream
+zero replacement to the combined table rather than to each dataset
+separately, and repeat the checks above on the combined table. Define one
+universe across the combined table. Record the number of taxa in each
+dataset and in the union. In per-dataset
 mode, keep datasets separate and repeat Steps 2 through 5 independently for
 each dataset, defining a separate universe and set of tested signatures for
 each one. Do not treat a pooled analysis as an aggregation of independent
@@ -223,12 +228,12 @@ does, pooling across samples rather than building a separate null per sample:
 2. Apply every subset to every sample with the formula above. This yields
    `n_perm` times the number of samples null scores for the signature,
    pooled into one vector.
-3. Fit the chosen `distribution` to the pooled null scores by maximum
-   likelihood (`CBEA::estimate_distr()`, which calls
-   `fitdistrplus::fitdist()` for `norm`).
-4. With `correlation_adjustment` enabled, fit the same distribution to the
+3. Fit a normal distribution to the pooled null scores by maximum
+   likelihood (`CBEA::estimate_distr()` with `distr = "norm"`, which calls
+   `fitdistrplus::fitdist()`).
+4. With `correlation_adjustment` enabled, fit a normal distribution to the
    observed scores of the signature across all samples, then combine the two
-   fits (`CBEA::combine_distr()`): for `norm`, the final null keeps the mean
+   fits (`CBEA::combine_distr()`): the final null keeps the mean
    of the permutation fit and takes the standard deviation from the fit to
    the observed scores. This widens the null to account for correlation among
    taxa, which the random subsets do not preserve. Because the observed fit
@@ -247,14 +252,13 @@ In the `CBEA` package the call that performs Steps 4.1 through 4.5 is:
 ```r
 set.seed(random_seed)
 CBEA::cbea(obj = abundance, set = signatures, output = "pval",
-           abund_values = "relative_abundance", distr = distribution,
+           abund_values = "relative_abundance", distr = "norm",
            adj = TRUE, n_perm = 100)
 ```
 
 where `abundance` is a `TreeSummarizedExperiment` whose named assay holds the
 harmonized, strictly positive relative abundances, and `signatures` is the
-`BiocSet` of retained signatures, and `distribution` is `"norm"` unless
-`"mnorm"` was selected and recorded. The package documentation describes
+`BiocSet` of retained signatures. The package documentation describes
 `n_perm` as bootstrap resamples; the implementation draws random taxon
 subsets as described above, and the protocol follows the implementation.
 
@@ -307,6 +311,17 @@ relative abundances in the BugSigDB vignette is one such choice, not a
 prescription of this protocol; if it is used, record its scale and rationale
 before running this protocol.
 
+The CBEA paper also fits a two-component normal mixture to the null scores,
+selectable with `distr = "mnorm"`. This protocol does not permit it because
+the correlation adjustment for the mixture in `CBEA` version 0.99.4
+(`get_sd()` in `R/utils.R`, and the objective functions in
+`get_adj_mnorm()`) computes the mixture standard deviation without squaring
+the component standard deviations and mean offsets, so the adjusted null is
+miscalibrated. For equally weighted components with means -3 and 3 and unit
+standard deviations, it returns 1 where the correct value is the square root
+of 10. If a corrected implementation is validated, a later version of this
+protocol can permit `mnorm` as an alternative from the same paper.
+
 The vignette requested `output = "zscore"` from `CBEA::cbea()` and passed the
 per-sample z-scores to a between-group linear model. That downstream analysis
 is out of scope here, and this protocol requests `output = "pval"` so that the
@@ -337,7 +352,9 @@ protocols.
   abundances, the background universe, set-size bounds, the competitive
   balance, the pooled cross-sample null and its correlation adjustment,
   upper-tail p-values, per-sample Benjamini-Hochberg adjustment, and pooled
-  versus per-dataset execution.
+  versus per-dataset execution with union-of-taxa merging.
+- Restricted the null to the normal distribution because the mixture
+  adjustment in `CBEA` 0.99.4 is miscalibrated.
 - Generalized from BugSigDB signatures to any collection of microbial
   signatures, with BugSigDB retained as the worked example.
 
@@ -346,4 +363,4 @@ protocols.
 **Review by Levi Waldron ([0000-0003-2725-0694](https://orcid.org/0000-0003-2725-0694))**
 - **Date:** 2026-10-17
 - **Status:** `approved`
-- **Notes:** Converted the protocol from a BugSigDB-specific protocol to a general CBEA protocol for any collection of microbial signatures, keeping BugSigDB as the worked example. Added code snippets naming the `bugsigdbr` and `CBEA` functions that perform each step. Restricted input to linear-scale relative abundance so that aggregation to the target rank can sum rows, with excluded rows logged as warnings. Specified the pooled cross-sample null, the correlation adjustment, upper-tail p-values, and seeding by `set.seed()` because the package does not forward its `parallel_backend` argument. Defined the multiple-testing family as all retained signatures within a sample.
+- **Notes:** Converted the protocol from a BugSigDB-specific protocol to a general CBEA protocol for any collection of microbial signatures, keeping BugSigDB as the worked example. Added code snippets naming the `bugsigdbr` and `CBEA` functions that perform each step. Restricted input to linear-scale relative abundance so that aggregation to the target rank can sum rows, with excluded rows logged as warnings. Specified the pooled cross-sample null, the correlation adjustment, upper-tail p-values, and seeding by `set.seed()` because the package does not forward its `parallel_backend` argument. Defined the multiple-testing family as all retained signatures within a sample. Restricted the null distribution to `norm` after a review comment showed the `mnorm` correlation adjustment in `CBEA` 0.99.4 is miscalibrated, and defined pooled-mode merging on the union of taxa.
