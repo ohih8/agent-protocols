@@ -6,7 +6,7 @@ authors:
   - name: Otto Infield-Harm
     orcid: 0009-0009-8629-6124
   - name: Levi Waldron
-    orcid: 0000-0002-2725-0694
+    orcid: 0000-0003-2725-0694
 date: 2026-09-22
 status: draft
 
@@ -51,7 +51,8 @@ least the selected threshold; features below the threshold are removed.
     feature must be detected to be retained. The default is `0.01` (1%).
   - `detection_rule`: a feature is detected when its abundance is greater than zero.
     This is the default rule. A positive detection floor may be selected instead,
-    but its value and units must be recorded.
+    in which case a feature is detected when its abundance is strictly greater than
+    the floor; the floor's value and units must be recorded.
   - `prevalence_scope`: compute prevalence after selecting the cohort and other
     analysis-set restrictions. This is the default. Computing prevalence before
     subsetting is an alternative that must be selected and recorded before filtering.
@@ -124,8 +125,7 @@ metagenomic application motivating this protocol used 1%.
 
 If a threshold expressed as a fraction does not correspond to an integer number of
 samples, apply the comparison to the unrounded fraction rather than silently
-rounding the threshold. Equivalently, a feature passes when
-`n_detected >= prevalence_threshold * n_samples`. Record the number of retained and
+rounding the threshold. Record the number of retained and
 removed features and the smallest retained and largest removed prevalence values
 when those sets are non-empty.
 
@@ -147,9 +147,6 @@ transformation, record that filtering occurred first because the retained featur
 set changes the subsequent calculation.
 
 ## Notes
-
-Testing of this protocol using GPT 5.6-Luna passed all generated test cases, many of which were designed to probe edge cases.
-The test cases are not included here as they were not created in the explicit test format nor run by the official tester.
 
 Callahan et al. describe prevalence as the number or fraction of samples in which a
 taxon appears at least once and motivate filtering as a way to avoid effort spent on
