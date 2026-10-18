@@ -1,7 +1,49 @@
 spec_version: 0.1.0
 repository: waldronlab/agent-protocols
-generated_at: '2026-09-14T03:35:49Z'
+generated_at: '2026-10-18T03:00:28Z'
 protocols:
+- name: cbea-signature-enrichment
+  description: Test microbial signatures, such as those curated in BugSigDB, for taxonomic
+    enrichment in each sample using competitive balances of compositional abundances
+    (CBEA).
+  version: 1.0.0
+  authors:
+  - name: Otto Infield-Harm
+    orcid: 0009-0009-8629-6124
+  - name: Levi Waldron
+    orcid: 0000-0003-2725-0694
+  reviews:
+  - name: Levi Waldron
+    orcid: 0000-0003-2725-0694
+    date: '2026-10-17'
+    protocol_version: 1.0.0
+    status: approved
+  date: '2026-10-17'
+  status: draft
+  type: atomic
+  artifact_doi: null
+  collection_doi: 10.5281/zenodo.22731694
+  protocol_citation: 10.1371/journal.pcbi.1010091
+  method_origin_citation: 10.1371/journal.pcbi.1010091
+  license: CC-BY-4.0
+  protocols_used: []
+  upstream_repositories:
+  - https://github.com/qpmnguyen/CBEA
+  - https://github.com/waldronlab/BugSigDBPaper
+  database_urls:
+  - https://bugsigdb.org/
+  key_packages:
+  - CBEA
+  - BiocSet
+  - bugsigdbr
+  category: Statistical Analysis
+  tags:
+  - enrichment
+  - microbe-sets
+  - cbea
+  - bugsigdb
+  - compositional-data
+  protocol_url: https://raw.githubusercontent.com/waldronlab/agent-protocols/main/protocols/cbea-signature-enrichment/protocol.md
 - name: humann4-augmented-clustering
   description: Predict ORFs and perform augmented UniRef-compatible protein clustering.
   version: 1.0.0
@@ -286,3 +328,31 @@ protocols:
   - mean
   - high-throughput
   protocol_url: https://raw.githubusercontent.com/waldronlab/agent-protocols/main/protocols/independent-filtering-variance/protocol.md
+- name: prevalence-filtering
+  description: Remove microbiome features detected in fewer than a prespecified fraction
+    of analysis samples before a separately specified downstream analysis.
+  version: 1.0.0
+  authors:
+  - name: Otto Infield-Harm
+    orcid: 0009-0009-8629-6124
+  - name: Levi Waldron
+    orcid: 0000-0003-2725-0694
+  date: '2026-09-22'
+  status: draft
+  license: CC-BY-4.0
+  type: atomic
+  protocol_citation: 10.12688/f1000research.8986.1
+  method_origin_citation: 10.12688/f1000research.8986.1
+  artifact_doi: null
+  collection_doi: 10.5281/zenodo.22731694
+  upstream_repositories: []
+  database_urls: []
+  protocols_used: []
+  key_packages: []
+  category: Data Transformation
+  tags:
+  - prevalence-filter
+  - filtering
+  - microbiome
+  - preprocessing
+  protocol_url: https://raw.githubusercontent.com/waldronlab/agent-protocols/main/protocols/prevalence-filtering/protocol.md
