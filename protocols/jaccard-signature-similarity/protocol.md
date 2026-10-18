@@ -7,6 +7,12 @@ authors:
     orcid: 0009-0009-8629-6124
   - name: Levi Waldron
     orcid: 0000-0003-2725-0694
+reviews:
+  - name: Levi Waldron
+    orcid: 0000-0003-2725-0694
+    date: "2026-10-17"
+    protocol_version: 1.0.0
+    status: approved
 date: 2026-10-06
 status: draft
 
@@ -205,4 +211,8 @@ testing.
 - Initial protocol creation.
 
 #### Reviews
-*No reviews yet.*
+
+**Review by Levi Waldron ([0000-0003-2725-0694](https://orcid.org/0000-0003-2725-0694))**
+- **Date:** 2026-10-17
+- **Status:** `approved`
+- **Notes:** Changed the method origin to Jaccard 1901 and the protocol citation to the BugSigDB paper, defined the singleton case as a 1 by 1 matrix, noted that dissimilarity is 1 - J for consumers that need it, and moved the evaluation note out of the protocol.
