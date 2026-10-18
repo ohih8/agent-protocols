@@ -7,6 +7,12 @@ authors:
     orcid: "0009-0009-8629-6124"
   - name: "Levi Waldron"
     orcid: "0000-0003-2725-0694"
+reviews:
+  - name: "Levi Waldron"
+    orcid: "0000-0003-2725-0694"
+    date: "2026-10-17"
+    protocol_version: "1.0.0"
+    status: "approved"
 date: "2026-10-06"
 status: draft
 type: "atomic"
@@ -170,4 +176,8 @@ must be specified separately.
 - Initial protocol creation.
 
 #### Reviews
-*No reviews yet.*
+
+**Review by Levi Waldron ([0000-0003-2725-0694](https://orcid.org/0000-0003-2725-0694))**
+- **Date:** 2026-10-17
+- **Status:** `approved`
+- **Notes:** Brought the similarity-to-distance conversion into the protocol as issue #9 specifies, stated that Ward's criterion is applied to squared distances and named the R (`ward.D2`) and scipy calls that compute it, defined the default tie rule by input index, and required the leaf order to be recorded.
