@@ -1,6 +1,6 @@
 spec_version: 0.1.0
 repository: waldronlab/agent-protocols
-generated_at: '2026-10-17T21:29:07Z'
+generated_at: '2026-10-18T03:00:28Z'
 protocols:
 - name: cbea-signature-enrichment
   description: Test microbial signatures, such as those curated in BugSigDB, for taxonomic
@@ -328,3 +328,31 @@ protocols:
   - mean
   - high-throughput
   protocol_url: https://raw.githubusercontent.com/waldronlab/agent-protocols/main/protocols/independent-filtering-variance/protocol.md
+- name: prevalence-filtering
+  description: Remove microbiome features detected in fewer than a prespecified fraction
+    of analysis samples before a separately specified downstream analysis.
+  version: 1.0.0
+  authors:
+  - name: Otto Infield-Harm
+    orcid: 0009-0009-8629-6124
+  - name: Levi Waldron
+    orcid: 0000-0003-2725-0694
+  date: '2026-09-22'
+  status: draft
+  license: CC-BY-4.0
+  type: atomic
+  protocol_citation: 10.12688/f1000research.8986.1
+  method_origin_citation: 10.12688/f1000research.8986.1
+  artifact_doi: null
+  collection_doi: 10.5281/zenodo.22731694
+  upstream_repositories: []
+  database_urls: []
+  protocols_used: []
+  key_packages: []
+  category: Data Transformation
+  tags:
+  - prevalence-filter
+  - filtering
+  - microbiome
+  - preprocessing
+  protocol_url: https://raw.githubusercontent.com/waldronlab/agent-protocols/main/protocols/prevalence-filtering/protocol.md
