@@ -81,20 +81,21 @@ Start with each signature as its own cluster and repeatedly merge the pair of
 clusters whose merge gives the smallest increase in the within-cluster sum of
 squared distances. Continue until all signatures form one hierarchy.
 
-Apply Ward's criterion to the squared distances. In the Lance-Williams
-update, after merging clusters `A` and `B`, the squared distance from the
-merged cluster to any other cluster `C` is:
+Apply Ward's criterion to the squared distances, and report each merge
+height as a distance rather than a squared distance. This is the criterion
+Ward described, and it is what the following calls compute from the
+distance matrix `d` of Step 1:
 
-```text
-d²(A∪B, C) = ((|A| + |C|) d²(A, C) + (|B| + |C|) d²(B, C) - |C| d²(A, B))
-             / (|A| + |B| + |C|)
+```r
+hclust(as.dist(d), method = "ward.D2")
 ```
 
-where `|X|` is the number of signatures in cluster `X`. The merge height
-reported for each step is the distance, not the squared distance. In R this
-is `hclust(as.dist(d), method = "ward.D2")`. Do not use `method = "ward.D"`,
-which applies the same update to unsquared distances and produces a
-different hierarchy from the same input.
+```python
+scipy.cluster.hierarchy.linkage(scipy.spatial.distance.squareform(d), method="ward")
+```
+
+Do not use R's `method = "ward.D"`, which applies the criterion to unsquared
+distances and produces a different hierarchy from the same input.
 
 Break ties with `tie_rule`. Record the linkage method, the tie rule, whether
 any tie occurred, the merge sequence with its heights, the leaf order of the
