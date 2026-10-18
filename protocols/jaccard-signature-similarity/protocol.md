@@ -13,8 +13,8 @@ status: draft
 license: CC-BY-4.0
 type: atomic
 
-protocol_citation: "10.1111/j.1469-8137.1912.tb05611.x"
-method_origin_citation: "10.1111/j.1469-8137.1912.tb05611.x"
+protocol_citation: "10.1038/s41587-023-01872-y"
+method_origin_citation: "10.5169/seals-266450"
 
 artifact_doi: ~
 collection_doi: "10.5281/zenodo.22731694"
@@ -109,9 +109,11 @@ signatures emptied by harmonization.
 
 Record every removed signature and the reason: empty after mapping, below the
 minimum length, or another prespecified input exclusion. Do not calculate a
-similarity involving an ineligible signature. If fewer than two signatures
-remain, output an empty matrix with its dimensions and reason rather than
-inventing pairwise values.
+similarity involving an ineligible signature. If no signature remains, output
+an empty matrix with its dimensions and reason rather than inventing pairwise
+values. If exactly one signature remains, output the labeled 1 by 1 matrix
+containing its diagonal value of `1.0`, as Step 6 requires for every retained
+signature.
 
 ### Step 4: Select eligible pairs
 
@@ -166,25 +168,26 @@ harmonized taxon sets and the signature-exclusion table as provenance.
 
 ## Notes
 
-The 1912 Jaccard article, *The Distribution of the Flora in the Alpine Zone*,
-is the DOI-indexed English-language primary source used here
-([10.1111/j.1469-8137.1912.tb05611.x](https://doi.org/10.1111/j.1469-8137.1912.tb05611.x)).
-Jaccard also published an earlier 1901 French work associated with the
-coefficient; the 1912 article is retained because it is the citable source
-identified for the coefficient in the repository issue and has a verified DOI.
+Jaccard proposed the coefficient in 1901 in *Étude comparative de la
+distribution florale dans une portion des Alpes et du Jura* (Bulletin de la
+Société Vaudoise des Sciences Naturelles 37:547-579,
+[10.5169/seals-266450](https://doi.org/10.5169/seals-266450)), which is the
+method origin cited here. His 1912 *New Phytologist* article, *The
+Distribution of the Flora in the Alpine Zone*
+([10.1111/j.1469-8137.1912.tb05611.x](https://doi.org/10.1111/j.1469-8137.1912.tb05611.x)),
+is the usual English-language account but is a later description, not the
+first publication. The instructions as written here, including genus-level
+harmonization and the minimum signature length of two, follow the BugSigDB
+paper (Geistlinger et al. 2023), which is the protocol citation.
+
+A dissimilarity or distance, when a downstream consumer asks for one, is
+`1 - J`; this protocol reports similarity and leaves that subtraction to the
+consumer.
 
 The source analyses use rank harmonization and a minimum signature length of
 two taxa. Those choices are defaults here, not properties of the Jaccard
 coefficient itself. Taxonomic harmonization is a lossy preprocessing decision,
 so results at different ranks are not interchangeable.
-
-Internal practical evaluation used small, duplicate, mixed-rank,
-empty-after-harmonization, direction-restricted, same-study, diagonal, symmetry,
-and large sparse cases. A fresh executor calculated all supplied concrete
-similarities correctly. Five cases lacked a pinned taxonomy mapping version and
-one large sparse case lacked actual taxon memberships; these were evaluation-case
-defects, not protocol failures. The test data and expected results are not
-included in this protocol.
 
 ## Out of scope
 
