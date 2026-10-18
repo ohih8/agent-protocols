@@ -7,6 +7,12 @@ authors:
     orcid: 0009-0009-8629-6124
   - name: Levi Waldron
     orcid: 0000-0003-2725-0694
+reviews:
+  - name: Levi Waldron
+    orcid: 0000-0003-2725-0694
+    date: "2026-10-17"
+    protocol_version: 1.0.0
+    status: approved
 date: 2026-09-22
 status: draft
 
@@ -177,4 +183,8 @@ multiple-testing adjustment; modelling; or interpretation of downstream results.
 - Initial protocol creation.
 
 #### Reviews
-*No reviews yet.*
+
+**Review by Levi Waldron ([0000-0003-2725-0694](https://orcid.org/0000-0003-2725-0694))**
+- **Date:** 2026-10-17
+- **Status:** `approved`
+- **Notes:** Corrected the second author ORCID, made the detection-floor comparison strict, removed a floating-point-sensitive restatement of the threshold rule, and moved the testing note out of the protocol.
