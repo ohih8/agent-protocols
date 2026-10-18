@@ -1,0 +1,32 @@
+name: variance_rows
+description: Unbiased variance filtering on a feature-by-sample matrix with features in rows.
+inputs:
+  data: input.csv
+  filter: variance
+  theta: 0.4
+  feature_orientation: rows
+  tie_breaker: feature_id_ascending
+expected_outputs:
+  summary:
+    A: 0
+    B: 1.3333333333333333
+    C: 1.3333333333333333
+    D: 33.333333333333336
+    E: 48
+  non_missing_counts:
+    A: 4
+    B: 4
+    C: 4
+    D: 4
+    E: 4
+  n_eligible: 5
+  m: 2
+  cutoff: 1.3333333333333333
+  removed_features: [A, B]
+  retained_features: [C, D, E]
+  retained_matrix: retained.csv
+evaluation:
+  mode: exact
+  compare_summary: true
+  compare_retained_matrix: true
+  numeric_tolerance: 1.0e-12

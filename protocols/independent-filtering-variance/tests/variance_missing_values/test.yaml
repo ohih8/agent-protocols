@@ -1,0 +1,31 @@
+name: variance_missing_values
+description: Variance filtering with missing values and an explicitly declared eligibility policy.
+inputs:
+  data: input.csv
+  filter: variance
+  theta: 0.5
+  feature_orientation: rows
+  missing_data_policy: exclude_features_with_fewer_than_two_non_missing_values
+expected_outputs:
+  summary:
+    A: 0
+    B: 1.3333333333333333
+    C: 8
+  non_missing_counts:
+    A: 4
+    B: 4
+    C: 2
+    D: 1
+  excluded_features: [D]
+  n_eligible: 3
+  m: 1
+  cutoff: 0
+  removed_features: [A]
+  retained_features: [B, C]
+  retained_matrix: retained.csv
+evaluation:
+  mode: exact
+  compare_summary: true
+  compare_non_missing_counts: true
+  compare_retained_matrix: true
+  numeric_tolerance: 1.0e-12

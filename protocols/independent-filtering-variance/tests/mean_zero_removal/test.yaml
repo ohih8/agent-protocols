@@ -1,0 +1,24 @@
+name: mean_zero_removal
+description: Mean filtering where floor(theta times n_eligible) is zero.
+inputs:
+  data: input.csv
+  filter: mean
+  theta: 0.1
+  feature_orientation: rows
+expected_outputs:
+  summary:
+    A: 1
+    B: 3
+    C: 5
+    D: 7
+  n_eligible: 4
+  m: 0
+  cutoff: null
+  removed_features: []
+  retained_features: [A, B, C, D]
+  retained_matrix: retained.csv
+evaluation:
+  mode: exact
+  compare_summary: true
+  compare_retained_matrix: true
+  numeric_tolerance: 0

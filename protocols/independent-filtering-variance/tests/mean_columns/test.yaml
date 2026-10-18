@@ -1,0 +1,32 @@
+name: mean_columns
+description: Diagnostic mean case with features in columns, testing correction or refusal.
+inputs:
+  data: input.csv
+  filter: mean
+  theta: 0.5
+  feature_orientation: columns
+expected_outputs:
+  input_orientation: features_in_columns
+  protocol_requirement: features_in_rows
+  accepted_outcomes:
+    - outcome: orientation_corrected
+      expected_summary:
+        A: 1
+        B: 3
+        C: 6.5
+        D: 10
+      removed_features: [A, B]
+      retained_features: [C, D]
+    - outcome: refused_for_orientation
+      required_observation: The protocol requires one feature per row and one sample per column; this input has one feature per column.
+  intended_feature_summaries:
+    A: 1
+    B: 3
+    C: 6.5
+    D: 10
+  intended_removed_features: [A, B]
+  intended_retained_features: [C, D]
+evaluation:
+  mode: diagnostic
+  accepted_outcomes: [orientation_corrected, refused_for_orientation]
+  reject_silent_row_feature_interpretation: true

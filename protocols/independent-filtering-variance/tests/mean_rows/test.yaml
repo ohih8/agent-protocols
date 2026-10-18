@@ -1,0 +1,24 @@
+name: mean_rows
+description: Mean filtering on a feature-by-sample matrix with features in rows.
+inputs:
+  data: input.csv
+  filter: mean
+  theta: 0.5
+  feature_orientation: rows
+expected_outputs:
+  summary:
+    A: 1
+    B: 3
+    C: 6.5
+    D: 10
+  n_eligible: 4
+  m: 2
+  cutoff: 3
+  removed_features: [A, B]
+  retained_features: [C, D]
+  retained_matrix: retained.csv
+evaluation:
+  mode: exact
+  compare_summary: true
+  compare_retained_matrix: true
+  numeric_tolerance: 0

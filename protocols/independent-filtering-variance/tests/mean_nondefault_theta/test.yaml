@@ -1,0 +1,25 @@
+name: mean_nondefault_theta
+description: Mean filtering with negative values and a non-default theta.
+inputs:
+  data: input.csv
+  filter: mean
+  theta: 0.4
+  feature_orientation: rows
+expected_outputs:
+  summary:
+    A: -3
+    B: -1
+    C: 0
+    D: 2
+    E: 7
+  n_eligible: 5
+  m: 2
+  cutoff: -1
+  removed_features: [A, B]
+  retained_features: [C, D, E]
+  retained_matrix: retained.csv
+evaluation:
+  mode: exact
+  compare_summary: true
+  compare_retained_matrix: true
+  numeric_tolerance: 0

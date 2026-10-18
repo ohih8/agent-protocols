@@ -1,0 +1,16 @@
+name: invalid_parameters
+description: Invalid filter and theta values must be rejected rather than silently corrected.
+inputs:
+  data: input.csv
+  filter: median
+  theta: 1.2
+  feature_orientation: rows
+expected_outputs:
+  status: refused_invalid_parameters
+  required_observations:
+    - filter must be either variance or mean
+    - theta must be between 0 and 1
+evaluation:
+  mode: diagnostic
+  require_invalid_parameter_refusal: true
+  reject_silent_parameter_correction: true

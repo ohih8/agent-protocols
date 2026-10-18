@@ -1,0 +1,38 @@
+name: variance_columns
+description: Diagnostic unbiased variance case with features in columns, testing correction or refusal.
+inputs:
+  data: input.csv
+  filter: variance
+  theta: 0.4
+  feature_orientation: columns
+  tie_breaker: feature_id_ascending
+expected_outputs:
+  input_orientation: features_in_columns
+  protocol_requirement: features_in_rows
+  accepted_outcomes:
+    - outcome: orientation_corrected
+      expected_summary:
+        A: 0
+        B: 1.3333333333333333
+        C: 1.3333333333333333
+        D: 33.333333333333336
+        E: 48
+      removed_features: [A, B]
+      retained_features: [C, D, E]
+    - outcome: refused_for_orientation
+      required_observation: The protocol requires one feature per row and one sample per column; this input has one feature per column.
+  intended_feature_summaries:
+    A: 0
+    B: 1.3333333333333333
+    C: 1.3333333333333333
+    D: 33.333333333333336
+    E: 48
+  intended_n_eligible: 5
+  intended_m: 2
+  intended_cutoff: 1.3333333333333333
+  intended_removed_features: [A, B]
+  intended_retained_features: [C, D, E]
+evaluation:
+  mode: diagnostic
+  accepted_outcomes: [orientation_corrected, refused_for_orientation]
+  reject_silent_row_feature_interpretation: true
