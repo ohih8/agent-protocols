@@ -20,6 +20,23 @@ the procedure in enough detail not to be affected by such implementation differe
 See [`independent-filtering-variance`](protocols/independent-filtering-variance/protocol.md) for an 
 example of appropriate tone and level of detail.
 
+### When code helps
+
+Prose defines the operation. Code can then pin the implementation, so that an agent does not reinvent
+`hclust()`. Two forms belong in a protocol:
+
+- **A named library call**, with every argument that matters written out even when it is the default.
+  `hclust(as.dist(d), method = "ward.D2")` says which of two Ward variants is meant; "Ward linkage" does
+  not. Give the call in more than one language when you can.
+- **A formula or a few lines of pseudocode**, where that is the shortest unambiguous statement of a step.
+
+Leave out anything an agent would have to run to understand: loops, data wrangling, plotting, and bare
+calls that leave a default unstated.
+
+The test: delete every code block, and the prose must still be complete. See
+[`cbea-signature-enrichment`](protocols/cbea-signature-enrichment/protocol.md), which names the `CBEA`
+function that performs each step of the inference.
+
 ## The four citation and DOI fields
 
 Each name says what it identifies. `*_citation` points at other work; `*_doi` identifies a thing.
@@ -150,6 +167,7 @@ does run a named method, an empty field is a question to raise, not an answer.
 - `protocol_citation` is required: who published these instructions. `method_origin_citation` is optional: who invented the method.
 - If a sibling protocol shares your `method_origin_citation`, `## Notes` says how yours differs.
 - An expert in the field could have a complete picture of the protocol without reading any code.
+  Code blocks name calls or state formulae; the prose stands without them.
 - Every configurable parameter has a stated default. Required inputs (data, software, parameters) are stated in the Materials section.
 - The out-of-scope section exists and is specific.
 
