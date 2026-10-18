@@ -5,6 +5,7 @@ inputs:
   filter: variance
   theta: 0.4
   feature_orientation: columns
+  tie_breaker: feature_id_ascending
 expected_outputs:
   input_orientation: features_in_columns
   protocol_requirement: features_in_rows
@@ -29,7 +30,6 @@ expected_outputs:
   intended_n_eligible: 5
   intended_m: 2
   intended_cutoff: 1.3333333333333333
-  intended_tie_breaker: feature_id_ascending
   intended_removed_features: [A, B]
   intended_retained_features: [C, D, E]
 evaluation:

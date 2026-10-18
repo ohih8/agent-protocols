@@ -5,6 +5,7 @@ inputs:
   filter: variance
   theta: 0.4
   feature_orientation: rows
+  tie_breaker: feature_id_ascending
 expected_outputs:
   summary:
     A: 0
@@ -21,7 +22,6 @@ expected_outputs:
   n_eligible: 5
   m: 2
   cutoff: 1.3333333333333333
-  tie_breaker: feature_id_ascending
   removed_features: [A, B]
   retained_features: [C, D, E]
   retained_matrix: retained.csv
