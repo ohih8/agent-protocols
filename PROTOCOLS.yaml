@@ -1,6 +1,6 @@
 spec_version: 0.1.0
 repository: waldronlab/agent-protocols
-generated_at: '2026-10-18T03:00:28Z'
+generated_at: '2026-10-18T03:09:38Z'
 protocols:
 - name: cbea-signature-enrichment
   description: Test microbial signatures, such as those curated in BugSigDB, for taxonomic
@@ -337,6 +337,12 @@ protocols:
     orcid: 0009-0009-8629-6124
   - name: Levi Waldron
     orcid: 0000-0003-2725-0694
+  reviews:
+  - name: Levi Waldron
+    orcid: 0000-0003-2725-0694
+    date: '2026-10-17'
+    protocol_version: 1.0.0
+    status: approved
   date: '2026-09-22'
   status: draft
   license: CC-BY-4.0
