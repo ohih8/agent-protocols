@@ -8,6 +8,7 @@ inputs:
   tie_breaker: feature_id_ascending
 evaluation:
   mode: diagnostic
+  numeric_tolerance: 1.0e-12
   accepted_outcomes:
   - outcome: orientation_corrected
     expected_outputs:
