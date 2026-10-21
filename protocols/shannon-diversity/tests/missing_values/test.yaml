@@ -1,0 +1,12 @@
+name: missing_values
+description: Missing abundance values must stop the calculation rather than be imputed or treated as zero.
+inputs:
+  data: {path: input.csv}
+  input_scale: counts
+  log_base: e
+  depth_normalization: none
+evaluation:
+  mode: diagnostic
+  accepted_outcomes:
+    - outcome: refused_for_missing_values
+      expected_absent: [result]

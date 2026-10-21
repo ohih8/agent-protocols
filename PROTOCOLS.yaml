@@ -1,6 +1,6 @@
 spec_version: 0.1.0
 repository: waldronlab/agent-protocols
-generated_at: '2026-10-18T03:16:26Z'
+generated_at: '2026-10-21T01:30:30Z'
 protocols:
 - name: cbea-signature-enrichment
   description: Test microbial signatures, such as those curated in BugSigDB, for taxonomic
@@ -398,6 +398,34 @@ protocols:
   - microbiome
   - preprocessing
   protocol_url: https://raw.githubusercontent.com/waldronlab/agent-protocols/main/protocols/prevalence-filtering/protocol.md
+- name: shannon-diversity
+  description: Calculate the Shannon diversity index for each sample in a feature-by-sample
+    abundance table.
+  version: 1.0.0
+  authors:
+  - name: Otto Infield-Harm
+    orcid: 0009-0009-8629-6124
+  - name: Levi Waldron
+    orcid: 0000-0003-2725-0694
+  reviews: []
+  date: '2026-10-20'
+  status: draft
+  type: atomic
+  artifact_doi: null
+  collection_doi: 10.5281/zenodo.22731694
+  protocol_citation: 10.1002/j.1538-7305.1948.tb01338.x
+  method_origin_citation: 10.1002/j.1538-7305.1948.tb01338.x
+  license: CC-BY-4.0
+  protocols_used: []
+  upstream_repositories: []
+  database_urls: []
+  key_packages: []
+  category: Statistical Analysis
+  tags:
+  - alpha-diversity
+  - shannon
+  - microbiome
+  protocol_url: https://raw.githubusercontent.com/waldronlab/agent-protocols/main/protocols/shannon-diversity/protocol.md
 - name: ward-linkage-signature-matrix-clustering
   description: Cluster and display a signature similarity matrix using Ward minimum-variance
     hierarchical linkage.

@@ -1,0 +1,12 @@
+name: counts_and_zeros
+description: Count data are converted to proportions and zero-valued features contribute zero.
+inputs:
+  data: {path: input.csv}
+  input_scale: counts
+  log_base: e
+  depth_normalization: none
+expected_outputs:
+  result: {path: expected.csv}
+evaluation:
+  mode: exact
+  numeric_tolerance: 1.0e-12
