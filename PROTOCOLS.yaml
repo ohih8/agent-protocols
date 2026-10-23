@@ -1,6 +1,6 @@
 spec_version: 0.1.0
 repository: waldronlab/agent-protocols
-generated_at: '2026-10-18T03:16:26Z'
+generated_at: '2026-10-23T14:03:44Z'
 protocols:
 - name: cbea-signature-enrichment
   description: Test microbial signatures, such as those curated in BugSigDB, for taxonomic
