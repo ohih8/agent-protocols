@@ -1,12 +1,14 @@
 name: counts_and_zeros
-description: Count data are converted to proportions and zero-valued features contribute zero.
+description: Counts with unequal sample totals give per-sample Shannon values, zero-valued features contribute zero, and the executor warns that the samples were not rarefied.
 inputs:
   data: {path: input.csv}
   input_scale: counts
   log_base: e
-  depth_normalization: none
-expected_outputs:
-  result: {path: expected.csv}
 evaluation:
-  mode: exact
+  mode: diagnostic
   numeric_tolerance: 1.0e-12
+  accepted_outcomes:
+    - outcome: computed_with_depth_warning
+      expected_outputs:
+        result: {path: expected.csv}
+      expected_warning: raref   # matches rarefy, rarefied, rarefying, rarefaction

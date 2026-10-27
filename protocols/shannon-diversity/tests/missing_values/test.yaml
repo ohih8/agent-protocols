@@ -4,7 +4,6 @@ inputs:
   data: {path: input.csv}
   input_scale: counts
   log_base: e
-  depth_normalization: none
 evaluation:
   mode: diagnostic
   accepted_outcomes:
