@@ -7,6 +7,12 @@ authors:
     orcid: "0009-0009-8629-6124"
   - name: "Levi Waldron"
     orcid: "0000-0003-2725-0694"
+reviews:
+  - name: "Levi Waldron"
+    orcid: "0000-0003-2725-0694"
+    date: "2026-10-27"
+    protocol_version: "1.0.0"
+    status: approved
 date: "2026-10-26"
 status: draft
 type: "atomic"
@@ -41,7 +47,7 @@ test hypotheses, or interpret the resulting values.
 ## Materials
 
 - **Input data:**
-  - `data` — a CSV table with one row per feature and one column per sample. The first
+  - `data` — a table with one row per feature and one column per sample. The first
     column must contain unique, non-missing feature identifiers, and there must be at
     least one sample column. Every other cell must be a non-negative number, and no cell
     may be missing: a missing value must not be imputed, converted to zero, or omitted.
@@ -106,9 +112,9 @@ names:
 
 Replace `exp(1)` or `math.e` with $b$ when `log_base` is not `e`.
 
-### Step 3: Write the result
+### Step 3: Return the result
 
-Write a CSV table with exactly two columns, `sample_id` and `shannon`, and one row
+Create a table with exactly two columns, `sample_id` and `shannon`, and one row
 for each input sample. Preserve the input sample-column order. Do not add feature
 summaries, group labels, confidence intervals, tests, plots, or interpretations.
 Record `input_scale`, `log_base`, and any warning given under Materials alongside the
@@ -136,4 +142,8 @@ the default of `shannon()` has differed between scikit-bio releases.
 - Initial protocol for calculating per-sample Shannon diversity.
 
 #### Reviews
-*No reviews yet.*
+
+**Review by Levi Waldron ([0000-0003-2725-0694](https://orcid.org/0000-0003-2725-0694))**
+- **Date:** 2026-10-27
+- **Status:** `approved`
+- **Notes:** Review given on waldronlab/agent-protocols#53.
